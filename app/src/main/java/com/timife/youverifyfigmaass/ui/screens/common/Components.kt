@@ -1,4 +1,4 @@
-package com.timife.youverifyfigmaass.ui.screens
+package com.timife.youverifyfigmaass.ui.screens.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -86,7 +87,23 @@ fun AppButton(modifier: Modifier, text: String, onClick: () -> Unit) {
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         shape = RoundedCornerShape(Dimens.grid_2)
     ) {
-        Text(text = text, style = TextStyle(), color = MaterialTheme.colorScheme.onPrimary)
+        Text(text = text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimary)
+    }
+}
+
+@Composable
+fun SignInOption(){
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Already have an account?", style = MaterialTheme.typography.bodyMedium)
+        Spacer(modifier = Modifier.size(Dimens.grid_1))
+        Text(
+            text = "Sign In",
+            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary)
+        )
     }
 }
 
@@ -123,7 +140,12 @@ fun CreateUserBottomContent(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(top = Dimens.grid_2_5, start = Dimens.grid_2_5, end = Dimens.grid_2_5, bottom = Dimens.grid_5),
+            .padding(
+                top = Dimens.grid_2_5,
+                start = Dimens.grid_2_5,
+                end = Dimens.grid_2_5,
+                bottom = Dimens.grid_5
+            ),
         verticalArrangement = Arrangement.spacedBy(Dimens.grid_2_5)
     ) {
         Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
@@ -161,6 +183,24 @@ fun CreateUserBottomContent(
         AppButton(modifier = Modifier.fillMaxWidth(), text = "Accept and Continue") {
 
         }
+    }
+}
+
+@Composable
+fun AuthField(
+    modifier: Modifier,
+    title: String,
+    text:String,
+    label:String,
+){
+    Column {
+        Text(text = title, style = MaterialTheme.typography.bodyMedium)
+        OutlinedTextField(value = "", onValueChange = {}, label = {
+            Text(
+                text = label,
+                style = TextStyle(color = MaterialTheme.colorScheme.surface)
+            )
+        }, modifier = Modifier.fillMaxWidth())
     }
 }
 
