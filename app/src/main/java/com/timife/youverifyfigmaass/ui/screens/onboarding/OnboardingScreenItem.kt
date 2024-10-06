@@ -1,4 +1,4 @@
-package com.timife.youverifyfigmaass.ui.screens
+package com.timife.youverifyfigmaass.ui.screens.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +25,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.timife.youverifyfigmaass.R
+import com.timife.youverifyfigmaass.ui.screens.common.AppButton
+import com.timife.youverifyfigmaass.ui.screens.common.BottomSheetDialog
+import com.timife.youverifyfigmaass.ui.screens.common.CreateUserBottomContent
+import com.timife.youverifyfigmaass.ui.screens.common.SignInOption
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
@@ -82,18 +86,7 @@ fun OnBoardingScreenItem(
             AppButton(modifier = Modifier.fillMaxWidth(), text = "Create an account") {
                 openBottomSheet = true
             }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = "Already have an account?", style = MaterialTheme.typography.bodyMedium)
-                Spacer(modifier = Modifier.size(Dimens.grid_1))
-                Text(
-                    text = "Sign In",
-                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary)
-                )
-            }
+            SignInOption()
         }
     }
 
