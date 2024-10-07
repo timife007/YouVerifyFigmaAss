@@ -1,20 +1,16 @@
 package com.timife.youverifyfigmaass.ui.screens.auth
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.timife.youverifyfigmaass.ui.screens.common.AppButton
 import com.timife.youverifyfigmaass.ui.screens.common.AuthField
 import com.timife.youverifyfigmaass.ui.screens.common.BottomTextOption
@@ -22,60 +18,55 @@ import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
 @Composable
-fun CreateUserScreen(
+fun EmailVerificationScreen(
     modifier: Modifier
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(10.dp),
+            .padding(
+                Dimens.grid_2
+            ),
+        verticalArrangement = Arrangement.spacedBy(Dimens.grid_3)
     ) {
         Text(
-            text = "Let's get started!",
+            text = "Check your email!",
             modifier = Modifier,
             style = MaterialTheme.typography.headlineMedium
         )
-        Spacer(modifier = Modifier.height(Dimens.grid_1_5))
+
         Text(
-            text = "Join us and start managing your finances with Fintrack today",
+            text = "We have sent an email to janedoe@gmail.com. Please remember to check your inbox as well as the spam folder",
             style = MaterialTheme.typography.bodyMedium
         )
-        Spacer(modifier = Modifier.height(Dimens.grid_4))
-        AuthField(
-            modifier = Modifier.fillMaxWidth(),
-            title = "First & Last Name",
-            text = "",
-            label = "e.g John Doe"
+
+        Text(
+            text = "Please enter the verification code below to continue with your account.",
+            style = MaterialTheme.typography.bodyMedium
         )
-        Spacer(modifier = Modifier.height(Dimens.grid_2_5))
+
         AuthField(
-            modifier = Modifier.fillMaxWidth(),
-            title = "Email address",
+            modifier = Modifier,
+            title = "Enter verification code",
             text = "",
-            label = "e.g email@mail.com"
-        )
-        Spacer(modifier = Modifier.height(Dimens.grid_2_5))
-        AuthField(
-            modifier = Modifier.fillMaxWidth(),
-            title = "Enter a referral code(optional)",
-            text = "",
-            label = "e.g email@mail.com"
+            label = "Enter code here"
         )
         Spacer(modifier = Modifier.weight(1f))
-        AppButton(modifier = Modifier, text = "Create an account") {
+        AppButton(modifier = Modifier, text = "Continue") {
 
         }
-        BottomTextOption()
-        Spacer(modifier = Modifier.height(Dimens.grid_5))
+        BottomTextOption("Didn't receive the email?", "Resend code in 50s")
+
     }
+
 }
 
 @Preview
 @Composable
-fun CreateUserScreenPreview() {
+fun EmailVerificationPreview() {
     YouVerifyFigmaAssTheme {
-        CreateUserScreen(
+        EmailVerificationScreen(
             Modifier
         )
     }

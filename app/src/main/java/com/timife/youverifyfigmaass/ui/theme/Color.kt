@@ -14,11 +14,13 @@ val Green1 = Color(0xFF008080)
 val Green2 = Color(0xFF2A9595)
 val Green3 = Color(0xFF55AAAA)
 val Green4 = Color(0xFFAAD5D5)
+val Green5 = Color(0xFFCCE6E6)
 
 val Orange1 = Color(0xFFFF8000)
 val Orange2 = Color(0xFFFF952B)
 val Orange3 = Color(0xFFFFAA55)
 val Orange4 = Color(0xFFFFD5AA)
+val Orange5 = Color(0xFFFFE6CC)
 
 val Grey1 = Color(0xFFCECFD2)
 val Grey2 = Color(0xFFECECED)

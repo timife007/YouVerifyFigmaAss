@@ -1,5 +1,6 @@
 package com.timife.youverifyfigmaass.ui.screens.common
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,9 +17,17 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowForwardIos
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.rounded.ArrowForwardIos
+import androidx.compose.material.icons.rounded.Visibility
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,7 +44,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -42,7 +54,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.timife.youverifyfigmaass.ui.theme.Dimens
+import com.timife.youverifyfigmaass.ui.theme.Orange2
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 import kotlinx.coroutines.launch
 
@@ -87,22 +102,29 @@ fun AppButton(modifier: Modifier, text: String, onClick: () -> Unit) {
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         shape = RoundedCornerShape(Dimens.grid_2)
     ) {
-        Text(text = text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimary)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimary
+        )
     }
 }
 
 @Composable
-fun SignInOption(){
+fun BottomTextOption(
+    firstText: String = "Already have an account?",
+    clickableText: String = "Sign In"
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = "Already have an account?", style = MaterialTheme.typography.bodyMedium)
+        Text(text = firstText, style = MaterialTheme.typography.labelSmall)
         Spacer(modifier = Modifier.size(Dimens.grid_1))
         Text(
-            text = "Sign In",
-            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary)
+            text = clickableText,
+            style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.primary)
         )
     }
 }
@@ -151,27 +173,17 @@ fun CreateUserBottomContent(
         Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
             Text(text = "Create an account", style = MaterialTheme.typography.headlineLarge)
             Spacer(modifier = Modifier.weight(1f))
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(Dimens.grid_4)
-                    .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
-                    .clickable {
-                        scope
-                            .launch { sheetState.hide() }
-                            .invokeOnCompletion {
-                                if (!sheetState.isVisible) {
-                                    onDismiss()
-                                }
-                            }
-                    }
+            CircleImage(
+                imageVector = Icons.Default.Close,
+                background = MaterialTheme.colorScheme.surface
             ) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Cancel",
-                    tint = Color.White,
-                    modifier = Modifier.size(Dimens.grid_2)
-                )
+                scope
+                    .launch { sheetState.hide() }
+                    .invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            onDismiss()
+                        }
+                    }
             }
         }
 
@@ -187,14 +199,148 @@ fun CreateUserBottomContent(
 }
 
 @Composable
+fun CircleImage(
+    imageVector: ImageVector,
+    background: Color,
+    iconTint: Color = Color.White,
+    onClick: () -> Unit
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(Dimens.grid_4)
+            .background(color = background, shape = CircleShape)
+            .clickable {
+                onClick()
+            }
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = "Cancel",
+            tint = iconTint,
+            modifier = Modifier.size(Dimens.grid_2)
+        )
+    }
+}
+
+
+
+@Composable
+fun HomeCard(
+    model:HomeCardModel
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(Dimens.grid_1),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = Dimens.grid_2),
+        shape = RoundedCornerShape(Dimens.grid_1)
+    ) {
+        Column(
+            modifier = Modifier
+                .background(model.background)
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .padding(Dimens.grid_1),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(Dimens.grid_1)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = model.title,
+                    style = MaterialTheme.typography.bodySmall.copy(color = model.contentColor)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+
+                CustomChip(background = model.chip, text = model.tag, iconTint = model.background )
+
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(Dimens.grid_1_5),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = model.amount,
+                    style = MaterialTheme.typography.headlineMedium.copy(color = model.contentColor)
+                )
+                Icon(
+                    imageVector = Icons.Rounded.Visibility,
+                    modifier = Modifier.size(Dimens.grid_3),
+                    tint = MaterialTheme.colorScheme.surface,
+                    contentDescription = "visibility"
+                )
+            }
+
+            Text(
+                text = model.details,
+                modifier = Modifier.padding(bottom = Dimens.grid_1_5),
+                style = MaterialTheme.typography.bodySmall.copy(model.contentColor)
+            )
+        }
+
+    }
+}
+
+@Composable
+fun BorderedCard(content:@Composable () -> Unit){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(Dimens.grid_1),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceVariant),
+        colors = CardDefaults.cardColors(),
+        shape = RoundedCornerShape(Dimens.grid_1)
+    ) {
+        content()
+    }
+}
+
+
+@Composable
+fun CustomChip(
+    background: Color,
+    text: String,
+    iconTint: Color
+){
+    Row(
+        Modifier
+            .clip(
+                RoundedCornerShape(Dimens.grid_4)
+            )
+            .background(background),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(Dimens.grid_0_5),
+            fontSize = 10.sp,
+            style = MaterialTheme.typography.labelSmall,
+            color = iconTint
+        )
+        Icon(
+            imageVector = Icons.AutoMirrored.Rounded.ArrowForwardIos,
+            modifier = Modifier.size(Dimens.grid_1_5),
+            tint = iconTint,
+            contentDescription = ""
+        )
+    }
+}
+
+@Composable
 fun AuthField(
     modifier: Modifier,
     title: String,
-    text:String,
-    label:String,
-){
+    text: String,
+    label: String,
+) {
     Column {
-        Text(text = title, style = MaterialTheme.typography.bodyMedium)
+        Text(text = title, style = MaterialTheme.typography.labelSmall)
         OutlinedTextField(value = "", onValueChange = {}, label = {
             Text(
                 text = label,
@@ -209,27 +355,8 @@ fun AuthField(
 @Composable
 fun ShowBottom() {
     YouVerifyFigmaAssTheme {
-        var openBottomSheet by remember {
-            mutableStateOf(false)
-        }
-
-        val bottomSheetState = rememberModalBottomSheetState()
-
-        Button(onClick = { openBottomSheet = true }) {
-            Text(text = "Show Bottom Sheet")
-        }
-
-        if (openBottomSheet) {
-            BottomSheetDialog(
-                sheetContent = {
-                    CreateUserBottomContent(sheetState = bottomSheetState) {
-                        openBottomSheet = false
-                    }
-                },
-                onDismiss = {
-                    openBottomSheet = false
-                }, sheetState = bottomSheetState
-            )
-        }
+        HomeCard(
+            homeCardItems[2]
+        )
     }
 }

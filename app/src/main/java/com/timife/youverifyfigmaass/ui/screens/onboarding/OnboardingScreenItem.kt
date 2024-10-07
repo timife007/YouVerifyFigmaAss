@@ -27,8 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.timife.youverifyfigmaass.R
 import com.timife.youverifyfigmaass.ui.screens.common.AppButton
 import com.timife.youverifyfigmaass.ui.screens.common.BottomSheetDialog
+import com.timife.youverifyfigmaass.ui.screens.common.BottomTextOption
 import com.timife.youverifyfigmaass.ui.screens.common.CreateUserBottomContent
-import com.timife.youverifyfigmaass.ui.screens.common.SignInOption
+import com.timife.youverifyfigmaass.ui.screens.common.OnBoardModel
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
@@ -86,17 +87,13 @@ fun OnBoardingScreenItem(
             AppButton(modifier = Modifier.fillMaxWidth(), text = "Create an account") {
                 openBottomSheet = true
             }
-            SignInOption()
+            BottomTextOption()
         }
     }
 
 }
 
-data class OnBoardModel(
-    val titleText: String,
-    val subtitleText: String = "",
-    val imageId: Int,
-)
+
 
 
 @Preview

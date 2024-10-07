@@ -18,8 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.timife.youverifyfigmaass.R
+import com.timife.youverifyfigmaass.ui.screens.common.pages
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
@@ -55,6 +57,7 @@ fun DashesIndicator(
     count: Int,
     activeColor: Color,
     inactiveColor: Color,
+    thickness: Dp = Dimens.grid_0_5,
     modifier: Modifier
 ) {
     Row(modifier.padding(Dimens.grid_2), horizontalArrangement = Arrangement.spacedBy(Dimens.grid_0_5)) {
@@ -63,30 +66,14 @@ fun DashesIndicator(
             Box(
                 modifier = Modifier
                     .weight(0.3f)
-                    .height(Dimens.grid_0_5)
+                    .height(thickness)
                     .background(color, shape = RoundedCornerShape(Dimens.grid_2))
             )
         }
     }
 }
 
-val pages = listOf(
-    OnBoardModel(
-        titleText = "Track Your \nExpenses",
-        subtitleText = "Get insights into where your money goes and make informed financial decisions.",
-        imageId = R.drawable.onboard_image_1
-    ),
-    OnBoardModel(
-        titleText = "Set Savings \nGoals",
-        subtitleText = "Whether it's for a vacation, a new car, or an emergency fund, we help you stay on track.",
-        imageId = R.drawable.onboard_image_2
-    ),
-    OnBoardModel(
-        titleText = "Get Financial \nInsights",
-        subtitleText = "Access detailed reports and analytics to make better financial choices.",
-        imageId = R.drawable.onboard_image_3
-    )
-)
+
 
 @Preview
 @Composable

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YouVerifyFigmaAss</string>
+    <string name="your_week_in">Your Week \nin</string>
+    <string name="money">" Money"</string>
 </resources>

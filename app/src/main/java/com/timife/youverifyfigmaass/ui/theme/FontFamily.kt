@@ -70,7 +70,13 @@ val vertexTypography = Typography(
         fontFamily = capriolaFontFamily,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.Normal
+    ),
+    bodySmall = TextStyle(
+        fontFamily = capriolaFontFamily,
+        fontSize = 12.sp,
+        lineHeight = 18.sp,
+        fontWeight = FontWeight.Normal
     ),
     labelLarge = TextStyle(
         fontFamily = capriolaFontFamily,
@@ -80,7 +86,7 @@ val vertexTypography = Typography(
     ),
     labelSmall = TextStyle(
         fontFamily = capriolaFontFamily,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
         lineHeight = 12.sp,
         fontWeight = FontWeight.Normal
     ),
