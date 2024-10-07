@@ -23,12 +23,13 @@ val capriolaFontFamily = FontFamily(mrLight, mrRegular, mrMedium, mrBold)
 val vertexTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = capriolaFontFamily,
-        fontSize = 64.sp,
+        fontSize = 48.sp,
         fontWeight = FontWeight.Medium
     ),
     displayMedium = TextStyle(
         fontFamily = capriolaFontFamily,
-        fontSize = 44.sp,
+        fontSize = 40.sp,
+        lineHeight = 48.sp,
         fontWeight = FontWeight.Normal
     ),
     displaySmall = TextStyle(

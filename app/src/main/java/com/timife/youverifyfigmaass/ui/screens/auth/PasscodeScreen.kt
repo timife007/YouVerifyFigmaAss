@@ -5,74 +5,71 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.timife.youverifyfigmaass.R
 import com.timife.youverifyfigmaass.ui.screens.common.AppButton
-import com.timife.youverifyfigmaass.ui.screens.common.AuthField
-import com.timife.youverifyfigmaass.ui.screens.common.BottomTextOption
+import com.timife.youverifyfigmaass.ui.screens.common.CustomKeyBoard
 import com.timife.youverifyfigmaass.ui.screens.common.ScreenRoute
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
 @Composable
-fun EmailVerificationScreen(
+fun PasscodeScreen(
     modifier: Modifier,
     navController: NavController
 ) {
+    var otp by remember {
+        mutableStateOf("")
+    }
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(top = Dimens.grid_5, start =
-                Dimens.grid_2, end = Dimens.grid_2, bottom = Dimens.grid_5
-            ),
-        verticalArrangement = Arrangement.spacedBy(Dimens.grid_3)
+            .padding(Dimens.grid_2),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(Dimens.grid_2)
     ) {
         Text(
-            text = "Check your email!",
-            modifier = Modifier,
+            text = stringResource(R.string.welcome_back),
+            modifier = Modifier.padding(top = Dimens.grid_8),
             style = MaterialTheme.typography.headlineMedium
         )
-
         Text(
-            text = "We have sent an email to janedoe@gmail.com. Please remember to check your inbox as well as the spam folder",
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        Text(
-            text = "Please enter the verification code below to continue with your account.",
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        AuthField(
+            text = stringResource(R.string.jane_doe),
             modifier = Modifier,
-            title = "Enter verification code",
-            text = "",
-            label = "Enter code here"
+            style = MaterialTheme.typography.titleLarge
         )
-        Spacer(modifier = Modifier.weight(1f))
-        AppButton(modifier = Modifier, text = "Continue") {
-            navController.navigate(ScreenRoute.SignInPrompt.route)
+        Spacer(modifier = Modifier.height(Dimens.grid_10))
+        CustomKeyBoard(modifier = Modifier.background(MaterialTheme.colorScheme.background),input = otp, onSignOutClicked = {}) {
+            otp = it
         }
-        BottomTextOption("Didn't receive the email?", "Resend code in 50s")
+        Spacer(modifier = Modifier.weight(1f))
 
+        AppButton(modifier = Modifier, text = "Continue") {
+            navController.navigate(ScreenRoute.GettingStartedScreen.route)
+        }
     }
 
 }
 
 @Preview
 @Composable
-fun EmailVerificationPreview() {
+fun PasscodeScreenPreview() {
     YouVerifyFigmaAssTheme {
-        EmailVerificationScreen(
-            Modifier,
-            rememberNavController()
-        )
+        PasscodeScreen(modifier = Modifier, navController = rememberNavController())
     }
 }

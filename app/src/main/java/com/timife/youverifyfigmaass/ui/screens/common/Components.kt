@@ -1,6 +1,7 @@
 package com.timife.youverifyfigmaass.ui.screens.common
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,15 +19,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForwardIos
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.ArrowForwardIos
 import androidx.compose.material.icons.rounded.Visibility
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,18 +31,15 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -57,7 +50,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.timife.youverifyfigmaass.ui.theme.Dimens
-import com.timife.youverifyfigmaass.ui.theme.Orange2
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 import kotlinx.coroutines.launch
 
@@ -93,19 +85,19 @@ fun V_MultiStyleText(
 }
 
 @Composable
-fun AppButton(modifier: Modifier, text: String, onClick: () -> Unit) {
+fun AppButton(modifier: Modifier, text: String, buttonColor:Color = MaterialTheme.colorScheme.primary, textColor: Color = MaterialTheme.colorScheme.onPrimary, onClick: () -> Unit) {
     Button(
         modifier = modifier.fillMaxWidth(),
         onClick = {
             onClick()
         },
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
         shape = RoundedCornerShape(Dimens.grid_2)
     ) {
         Text(
             text = text,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onPrimary
+            color = textColor
         )
     }
 }
@@ -155,7 +147,8 @@ fun BottomSheetDialog(
 @Composable
 fun CreateUserBottomContent(
     sheetState: SheetState,
-    onDismiss: () -> Unit
+    onAccept:() -> Unit,
+    onDismiss: () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     Column(
@@ -193,7 +186,7 @@ fun CreateUserBottomContent(
         )
 
         AppButton(modifier = Modifier.fillMaxWidth(), text = "Accept and Continue") {
-
+            onAccept()
         }
     }
 }
@@ -282,6 +275,50 @@ fun HomeCard(
             )
         }
 
+    }
+}
+
+@Composable
+fun ShadowedCard(
+    title: String,
+    description: String,
+    image: Int,
+    background: Color = MaterialTheme.colorScheme.background
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = Dimens.grid_2),
+        shape = RoundedCornerShape(Dimens.grid_1)
+    ) {
+        Row(
+            modifier = Modifier
+                .background(background)
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .padding(Dimens.grid_1),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.spacedBy(
+                    Dimens.grid_1
+                )
+            ) {
+                Text(text = title, style = MaterialTheme.typography.bodyMedium)
+                Text(text = description, style = MaterialTheme.typography.bodySmall)
+            }
+            Image(
+                painter = painterResource(id = image),
+                contentScale = ContentScale.Inside,
+                modifier = Modifier.size(Dimens.grid_12_5),
+                contentDescription = ""
+            )
+
+        }
     }
 }
 

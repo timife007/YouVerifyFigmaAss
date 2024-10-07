@@ -4,11 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -24,12 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.timife.youverifyfigmaass.R
 import com.timife.youverifyfigmaass.ui.screens.common.AppButton
 import com.timife.youverifyfigmaass.ui.screens.common.BottomSheetDialog
 import com.timife.youverifyfigmaass.ui.screens.common.BottomTextOption
 import com.timife.youverifyfigmaass.ui.screens.common.CreateUserBottomContent
 import com.timife.youverifyfigmaass.ui.screens.common.OnBoardModel
+import com.timife.youverifyfigmaass.ui.screens.common.ScreenRoute
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
@@ -37,7 +39,8 @@ import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 @Composable
 fun OnBoardingScreenItem(
     modifier: Modifier = Modifier,
-    onBoardModel: OnBoardModel
+    onBoardModel: OnBoardModel,
+    navController: NavController
 ) {
     var openBottomSheet by remember {
         mutableStateOf(false)
@@ -46,7 +49,9 @@ fun OnBoardingScreenItem(
 
     if (openBottomSheet) {
         BottomSheetDialog(sheetContent = {
-            CreateUserBottomContent(sheetState = bottomSheetState) {
+            CreateUserBottomContent(sheetState = bottomSheetState, onAccept = {
+                navController.navigate(ScreenRoute.SignupScreen.route)
+            }) {
                 openBottomSheet = false
             }
         }, onDismiss = {
@@ -58,7 +63,7 @@ fun OnBoardingScreenItem(
     Column(
         modifier = modifier
             .background(MaterialTheme.colorScheme.background)
-            .wrapContentSize()
+            .fillMaxSize()
             .padding(Dimens.grid_2),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(Dimens.grid_3)
@@ -80,7 +85,9 @@ fun OnBoardingScreenItem(
         )
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .wrapContentSize()
+                .padding(bottom = 45.dp),
             verticalArrangement = Arrangement.spacedBy(Dimens.grid_2),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -106,7 +113,8 @@ fun OnBoardingScreenPreview() {
                 titleText = "Set Savings \nGoals",
                 subtitleText = "Get insights into where your money goes and make informed financial decisions.",
                 imageId = R.drawable.onboard_image_2
-            )
+            ),
+            rememberNavController()
         )
     }
 }

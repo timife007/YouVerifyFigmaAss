@@ -2,4 +2,16 @@
     <string name="app_name">YouVerifyFigmaAss</string>
     <string name="your_week_in">Your Week \nin</string>
     <string name="money">" Money"</string>
+    <string name="sign_in_to_your_account_and_start_managing_your_finances_with_fintrack_today">Sign in to your account and start managing your finances with Fintrack today.</string>
+    <string name="email_address">Email address</string>
+    <string name="e_g_email_gmail_com">e.g email@gmail.com</string>
+    <string name="do_not_have_an_account">Do not have an account?</string>
+    <string name="we_have_sent_an_email_to_janedoe_gmail_com_please_remember_to_check_your_inbox_as_well_as_the_spam_folder">We have sent an email to janedoe@gmail.com. Please remember to check your inbox as well as the spam folder</string>
+    <string name="please_enter_the_one_time_passcode_otp_below_to_continue_with_your_account">Please enter the one time passcode(OTP) below to continue with your account.</string>
+    <string name="enter_one_time_passcode_otp">Enter one time passcode(OTP)</string>
+    <string name="enter_code_here">Enter code here</string>
+    <string name="didn_t_receive_the_email">Didn\'t receive the email?</string>
+    <string name="resend_code_in_50s">Resend code in 50s</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="jane_doe">Jane Doe</string>
 </resources>

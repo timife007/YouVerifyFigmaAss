@@ -19,15 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.timife.youverifyfigmaass.R
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.timife.youverifyfigmaass.ui.screens.common.pages
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
 @Composable
 fun OnboardingScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    navController: NavController
 ) {
     val pageState = rememberPagerState(initialPage = 0, 0f) { pages.count() }
 
@@ -46,7 +47,7 @@ fun OnboardingScreen(
             modifier = Modifier.padding(top = Dimens.grid_3)
         )
         HorizontalPager(state = pageState) {
-            OnBoardingScreenItem(onBoardModel = pages[it])
+            OnBoardingScreenItem(onBoardModel = pages[it], navController = navController)
         }
     }
 }
@@ -79,6 +80,6 @@ fun DashesIndicator(
 @Composable
 fun OnboardingScreenPreview() {
     YouVerifyFigmaAssTheme {
-        OnboardingScreen(modifier = Modifier)
+        OnboardingScreen(modifier = Modifier, rememberNavController())
     }
 }

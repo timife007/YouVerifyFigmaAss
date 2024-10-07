@@ -7,29 +7,38 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.timife.youverifyfigmaass.ui.screens.common.AppButton
 import com.timife.youverifyfigmaass.ui.screens.common.AuthField
 import com.timife.youverifyfigmaass.ui.screens.common.BottomTextOption
+import com.timife.youverifyfigmaass.ui.screens.common.ScreenRoute
 import com.timife.youverifyfigmaass.ui.theme.Dimens
 import com.timife.youverifyfigmaass.ui.theme.YouVerifyFigmaAssTheme
 
 @Composable
 fun CreateUserScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    navController: NavController
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .padding(10.dp),
+            .padding(
+                top = Dimens.grid_5,
+                start = Dimens.grid_2,
+                end = Dimens.grid_2,
+                bottom = Dimens.grid_2
+            )
+            .wrapContentSize(),
     ) {
         Text(
             text = "Let's get started!",
@@ -64,7 +73,7 @@ fun CreateUserScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         AppButton(modifier = Modifier, text = "Create an account") {
-
+            navController.navigate(ScreenRoute.EmailVerificationScreen.route)
         }
         BottomTextOption()
         Spacer(modifier = Modifier.height(Dimens.grid_5))
@@ -76,7 +85,8 @@ fun CreateUserScreen(
 fun CreateUserScreenPreview() {
     YouVerifyFigmaAssTheme {
         CreateUserScreen(
-            Modifier
+            Modifier,
+            rememberNavController()
         )
     }
 }

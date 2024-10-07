@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.viewModelCompose)
     implementation(libs.accompanist.pager)
+    implementation ("androidx.navigation:navigation-compose:2.8.2")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

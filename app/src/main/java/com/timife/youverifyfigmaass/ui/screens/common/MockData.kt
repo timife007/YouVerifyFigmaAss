@@ -2,6 +2,8 @@ package com.timife.youverifyfigmaass.ui.screens.common
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CurrencyRuble
+import androidx.compose.material.icons.rounded.DirectionsBus
+import androidx.compose.material.icons.rounded.EmojiFoodBeverage
 import androidx.compose.material.icons.rounded.IncompleteCircle
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -9,9 +11,8 @@ import com.timife.youverifyfigmaass.R
 import com.timife.youverifyfigmaass.ui.theme.Black1
 import com.timife.youverifyfigmaass.ui.theme.Green1
 import com.timife.youverifyfigmaass.ui.theme.Green5
+import com.timife.youverifyfigmaass.ui.theme.Grey1
 import com.timife.youverifyfigmaass.ui.theme.Orange1
-import com.timife.youverifyfigmaass.ui.theme.Orange2
-import com.timife.youverifyfigmaass.ui.theme.Orange4
 import com.timife.youverifyfigmaass.ui.theme.Orange5
 
 val homeCardItems = listOf(
@@ -100,15 +101,70 @@ val recentActivities = listOf(
         "Created a new budget  'Trip to \n" +
                 "Nairobi'", "a day ago", Icons.Rounded.IncompleteCircle, Orange5, "$ 200, 000"
     ),
-    ActivitiesModel("Paul Ogaga", "Zenith Bank 12:03 AM", Icons.Rounded.CurrencyRuble, Green5, "$10, 000")
+    ActivitiesModel(
+        "Paul Ogaga",
+        "Zenith Bank 12:03 AM",
+        Icons.Rounded.CurrencyRuble,
+        Green5,
+        "$10, 000"
+    )
 )
 
 data class TimeBasedActivityModel(
-    val time:String,
+    val time: String,
     val activity: List<ActivitiesModel>
 )
 
 val timeBasedActivities = listOf(
     TimeBasedActivityModel("Today, 14/07/2024", recentActivities),
     TimeBasedActivityModel("Yesterday, 13/07/2024", recentActivities)
+)
+
+val resentExpenses =
+    listOf(
+        ActivitiesModel(
+            "Food $ Drinks", "", Icons.Rounded.EmojiFoodBeverage, Grey1, "$ 200, 000"
+        ),
+        ActivitiesModel(
+            "Transportation",
+            "",
+            Icons.Rounded.DirectionsBus,
+            Grey1,
+            "$10, 000"
+        ),
+        ActivitiesModel(
+            "Food $ Drinks", "", Icons.Rounded.EmojiFoodBeverage, Grey1, "$ 200, 000"
+        ),
+        ActivitiesModel(
+            "Transportation",
+            "",
+            Icons.Rounded.DirectionsBus,
+            Grey1,
+            "$10, 000"
+        )
+    )
+
+val timeBasedExpenses = listOf(
+    TimeBasedActivityModel("Today, 14/07/2024", resentExpenses),
+    TimeBasedActivityModel("Yesterday, 13/07/2024", resentExpenses)
+)
+
+data class SetupItem(
+    val title: String,
+    val description: String,
+    val image: Int
+)
+
+val setUpItems = listOf(
+    SetupItem("Set up a pin", "Enhance your account security", R.drawable.onboard_image_2),
+    SetupItem(
+        "Link your bank \naccounts",
+        "Link your bank accounts to \nstart tracking your expenses.",
+        R.drawable.onboard_image_1
+    ),
+    SetupItem(
+        "Create a savings goal",
+        "What are your financial \ngoals?",
+        R.drawable.onboard_image_3
+    )
 )
